@@ -10,6 +10,7 @@ html {
 	--small-space: 0.5em;
 	--medium-space: 1em;
 	--big-space: 2em;
+	--very-big-space: 10em;
 
 	--small-font-size: 0.5rem;
 	--medium-font-size: 1rem;
@@ -19,4 +20,6 @@ html {
 	--color-black: #050607;
 	--color-gray: ##adb5bd;
 	--color-white: #f8f9fa;
+
+	--font: Pixelify Sans, Arial;
 }

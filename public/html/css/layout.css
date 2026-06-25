@@ -1,7 +1,52 @@
 @layer layout {
+	.flex-row {
+		display: flex;
+		flex-direction: row;
+	}
+
+	.flex-column {
+		display: flex;
+		flex-direction: column;
+	}
+
 	#site-header {
 		text-align: center;
 		margin: var(--big-space) 0;
+	}
+
+	.project {
+		width: 90%;
+		align-items: center;
+
+		display: grid;
+		grid-template-areas:
+			"header img"
+			"p 		img"
+			"i img";
+
+		>header {
+			grid-area: header;
+			width: 90%;
+			justify-self: center;
+			align-self: end;
+		}
+
+		>img {
+			grid-area: img;
+		}
+
+		>p {
+			grid-area: p;
+			width: 90%;
+			justify-self: center;
+			align-self: center;
+		}
+
+		>i {
+			grid-area: i;
+			justify-self: center;
+			align-self: center;
+		}
 	}
 
 	#best-projects {
@@ -18,54 +63,16 @@
 		}
 
 		#best-projects-content {
-			display: flex;
 			justify-content: space-between;
 
 			height: 90%;
 			margin: auto 0;
-
-			.marked-project {
-				width: 90%;
-				align-items: center;
-
-				display: grid;
-				grid-template-areas:
-					"header img"
-					"p 		img"
-					"i img";
-
-				>header {
-					grid-area: header;
-					width: 90%;
-					justify-self: center;
-					align-self: end;
-				}
-
-				>img {
-					grid-area: img;
-				}
-
-				>p {
-					grid-area: p;
-					width: 90%;
-					justify-self: center;
-					align-self: center;
-				}
-
-				>i {
-					grid-area: i;
-					justify-self: center;
-					align-self: center;
-				}
-			}
 		}
 	}
 
 	#extra-actions {
 		width: 50%;
 		margin: var(--big-space) auto;
-
-		display: flex;
 		justify-content: space-evenly;
 
 		button {
@@ -74,5 +81,46 @@
 
 		}
 
+	}
+
+	.modal:open {
+		width: 60%;
+		height: 50%;
+		position: absolute;
+
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+
+		display: flex;
+		flex-direction: column;
+	}
+
+	#search-modal-content {
+		display: flex;
+		flex: 1;
+
+		justify-content: space-evenly;
+		padding: var(--medium-space);
+
+		>ul {
+			min-width: 20%;
+			max-width: 30%;
+		}
+
+		.project {
+			margin: auto 0;
+		}
+	}
+
+	#search-bar {
+		padding: var(--small-space);
+		margin-top: auto;
+		gap: var(--small-space);
+	}
+
+	#all-projects {
+		margin-top: var(--very-big-space);
+		gap: var(--medium-space);
 	}
 }

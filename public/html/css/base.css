@@ -8,12 +8,24 @@
 	body {
 		background-color: var(--color-black);
 		color: var(--color-white);
-		font-family: Pixelify Sans, Arial;
+		font-family: var(--font);
 	}
 
 	button {
 		background: none;
 		border: none;
 		color: var(--color-white);
+	}
+
+	li {
+		list-style: none;
+	}
+
+	input {
+		background-color: var(--color-black);
+		color: var(--color-white);
+		font-family: var(--font);
+		border: none;
+		outline: none;
 	}
 }

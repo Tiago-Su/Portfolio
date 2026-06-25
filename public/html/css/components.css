@@ -5,6 +5,14 @@
 		}
 	}
 
+	.trunctate-items {
+		li {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+	}
+
 
 	#best-projects {
 		border: var(--big-border-size) groove var(--color-white);
@@ -36,7 +44,7 @@
 				}
 			}
 
-			.marked-project {
+			.project {
 				i {
 					font-size: var(--very-big-font-size);
 				}
@@ -49,6 +57,48 @@
 
 		button>i {
 			font-size: var(--very-big-font-size);
+		}
+	}
+
+	.modal {
+		border: var(--small-border-size) solid var(--color-white);
+		background-color: var(--color-black);
+		color: var(--color-white);
+	}
+
+	#search-modal-content {
+		ul {
+			border-right: var(--small-border-size) dashed var(--color-white);
+
+			li::before {
+				content: "\00a0";
+			}
+
+			li.selected::before {
+				content: "> ";
+			}
+		}
+	}
+
+	#search-bar {
+		font-size: 1.5rem;
+		font-family: var(--font);
+
+		input {
+			font-size: 1.5rem;
+			font-family: var(--font);
+
+			width: 100%;
+			color: var(--color-white);
+		}
+
+	}
+
+	#all-projects {
+		>header h2 {
+			width: max-content;
+			margin: 0 auto;
+			border-bottom: var(--small-border-size) solid var(--color-white);
 		}
 	}
 }
