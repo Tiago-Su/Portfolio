@@ -54,7 +54,7 @@
 			</div>
 		</section>
 
-		<section class="flex-row" id="extra-actions">
+		<div class="flex-row" id="extra-actions">
 			<button class="icon" id="add-project">
 				<i class="icon fa-solid fa-plus"></i>
 			</button>
@@ -62,7 +62,7 @@
 			<button class="icon" id="see-projects">
 				<i class="fa-solid fa-magnifying-glass"></i>
 			</button>
-		</section>
+		</div>
 
 		<section class="flex-column" id="all-projects">
 			<header>
@@ -116,7 +116,7 @@
 		</section>
 	</main>
 
-	<dialog class="modal">
+	<dialog class="modal" open>
 		<div id="search-modal-content">
 			<ul class="trunctate-items">
 				<li class="selected">Project 1</li>
@@ -141,8 +141,8 @@
 		</div>
 
 		<label id="search-bar" class="flex-row">
-			<p>&gt</p>
-			<input name="search-project" type="search" />
+			&gt;
+			<input name="search-project" type="search">
 		</label>
 	</dialog>
 
