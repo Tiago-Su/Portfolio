@@ -1,0 +1,78 @@
+@layer layout {
+	#site-header {
+		text-align: center;
+		margin: var(--big-space) 0;
+	}
+
+	#best-projects {
+		width: 70%;
+		margin: 0 auto;
+		height: 40em;
+
+		>header {
+			height: 10%;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		#best-projects-content {
+			display: flex;
+			justify-content: space-between;
+
+			height: 90%;
+			margin: auto 0;
+
+			.marked-project {
+				width: 90%;
+				align-items: center;
+
+				display: grid;
+				grid-template-areas:
+					"header img"
+					"p 		img"
+					"i img";
+
+				>header {
+					grid-area: header;
+					width: 90%;
+					justify-self: center;
+					align-self: end;
+				}
+
+				>img {
+					grid-area: img;
+				}
+
+				>p {
+					grid-area: p;
+					width: 90%;
+					justify-self: center;
+					align-self: center;
+				}
+
+				>i {
+					grid-area: i;
+					justify-self: center;
+					align-self: center;
+				}
+			}
+		}
+	}
+
+	#extra-actions {
+		width: 50%;
+		margin: var(--big-space) auto;
+
+		display: flex;
+		justify-content: space-evenly;
+
+		button {
+			flex: 1;
+			padding: var(--medium-space);
+
+		}
+
+	}
+}

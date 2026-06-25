@@ -1,0 +1,22 @@
+@layer base, layout, components;
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
+
+html {
+	--small-border-size: 1px;
+	--medium-border-size: 2px;
+	--big-border-size: 5px;
+
+	--small-space: 0.5em;
+	--medium-space: 1em;
+	--big-space: 2em;
+
+	--small-font-size: 0.5rem;
+	--medium-font-size: 1rem;
+	--big-font-size: 1.5rem;
+	--very-big-font-size: 2rem;
+
+	--color-black: #050607;
+	--color-gray: ##adb5bd;
+	--color-white: #f8f9fa;
+}

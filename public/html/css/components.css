@@ -1,0 +1,54 @@
+@layer components {
+	.icon {
+		&:hover {
+			opacity: 50%;
+		}
+	}
+
+
+	#best-projects {
+		border: var(--big-border-size) groove var(--color-white);
+
+		>header {
+			border-bottom: var(--medium-border-size) groove var(--color-white);
+
+			h2 {
+				padding-bottom: var(--small-space);
+			}
+		}
+
+		#best-projects-content {
+			.arrow {
+				cursor: pointer;
+				border: none;
+				background: none;
+
+				color: var(--color-white);
+				transition: background-color 0.3s ease;
+
+				font-size: var(--medium-font-size);
+
+				&:hover {
+					opacity: 40%;
+					background-color: var(--color-white);
+					color: var(--color-black);
+
+				}
+			}
+
+			.marked-project {
+				i {
+					font-size: var(--very-big-font-size);
+				}
+			}
+		}
+	}
+
+	#extra-actions {
+		border: var(--big-border-size) groove var(--color-white);
+
+		button>i {
+			font-size: var(--very-big-font-size);
+		}
+	}
+}
