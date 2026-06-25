@@ -29,6 +29,9 @@
 			width: 90%;
 			justify-self: center;
 			align-self: end;
+
+			align-items: center;
+			gap: var(--small-space);
 		}
 
 		>img {
@@ -42,7 +45,7 @@
 			align-self: center;
 		}
 
-		>i {
+		a {
 			grid-area: i;
 			justify-self: center;
 			align-self: center;
@@ -86,7 +89,7 @@
 	.modal:open {
 		width: 60%;
 		height: 50%;
-		position: absolute;
+		position: fixed;
 
 		top: 50%;
 		left: 50%;
