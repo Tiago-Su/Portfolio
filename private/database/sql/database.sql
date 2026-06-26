@@ -1,5 +1,14 @@
 PRAGMA foreign_keys = ON;
 
+CREATE TABLE Admin (
+	id INTEGER NOT NULL,
+	userName TEXT NOT NULL UNIQUE,
+	password TEXT NOT NULL,
+	email TEXT NOT NULL,
+
+	CONSTRAINT pk_image PRIMARY KEY(id)
+);
+
 CREATE TABLE Image (
 	id INTEGER NOT NULL,
 	imageName TEXT NOT NULL,

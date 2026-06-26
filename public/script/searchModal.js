@@ -83,6 +83,7 @@ function moveDown() {
 
 function goToProject() {
 	const projectList = projectUl.children;
+	window.location.hash = "#"
 	window.location.hash = "project" + projectList[selectedProject].id.split(":")[1];
 	closeSearchModal();
 }
@@ -182,14 +183,14 @@ function handleKeyMaps(e) {
 
 searchProjectButton.addEventListener("click", (e) => {
 	openSearchModal();
-	e.preventDefault();
+	e.stopPropagation();
 });
 
 document.addEventListener("click", (e) => {
 	const rect = searchModal.getBoundingClientRect();
 	const inside = e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom;
 
-	if (!inside) {
+	if (searchModal.open && !inside) {
 		closeSearchModal();
 	}
 });

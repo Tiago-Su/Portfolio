@@ -62,7 +62,6 @@ class Project implements JsonSerializable {
 		}
 
 		return $projects;
-	
 	}
 
 	public static function getProjectById(PDO $db, int $id) : ?Project {
@@ -101,8 +100,6 @@ class Project implements JsonSerializable {
 		}
 
 		return $projects;
-	
-	
 	}
 
 	public function jsonSerialize(): mixed {
