@@ -119,6 +119,7 @@ function insertModeCmd(e) {
 		e.preventDefault();
 		searchBar.blur();
 		currentMode = Mode.NORMAL;
+		reloadSearchModal();
 	}
 
 	if (e.key === "Enter") {
