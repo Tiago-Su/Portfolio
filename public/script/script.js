@@ -1,54 +1,38 @@
 const favoriteSection = document.querySelector("#best-projects");
+
 if (favoriteSection) {
 	favoriteSection.querySelector(".project").classList.toggle("invisible");
 }
 
-const searchModal = document.querySelector("#search-modal");
-const searchProjectButton = document.querySelector("#see-projects");
-const searchBar = searchModal.querySelector("#search-bar > input");
+async function fetchImageURL(resource) {
+	const response = await fetch(resource);
+	const blob = await response.blob();
+	const url = URL.createObjectURL(blob);
 
-let lastKey = null;
-
-function openSearchModal() {
-	searchModal.show();
-	searchBar.focus();
+	return url;
 }
 
 
-if (searchModal && searchProjectButton) {
-	searchProjectButton.addEventListener("click", (e) => {
-		openSearchModal();
-		e.stopPropagation();
-	});
-
-	document.addEventListener("click", (e) => {
-		const rect = searchModal.getBoundingClientRect();
-		const inside = e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom;
-
-		if (!inside) {
-			searchModal.close();
+async function fetchData(resource, data, method) {
+	const options = {
+		method,
+		headers: {
+			"Content-Type": "application/json"
 		}
-	});
+	}
+
+	if (data && method !== "GET") options.body = JSON.stringify(data);
+	const response = await fetch(resource, options);
 
 
-	document.addEventListener("keydown", (e) => {
-		if (e.key === "Escape") {
-			searchModal.close();
-		}
-
-		if (lastKey === " " && e.key === " ") {
-			openSearchModal();
-		}
-	})
+	if (!response.ok) throw new Error('HTTP error: ' + response.status);
+	return await response.json();
 }
 
-document.addEventListener("keydown", (e) => {
-	if (e.key == " " && (e.target.tagName !== "INPUT" || e.target.tagName !== "TEXTAREA")) e.preventDefault();
+function getData(resource) {
+	return fetchData(resource, null, "GET");
+}
 
-	lastKey = e.key;
-	setTimeout(() => {
-		lastKey = null;
-
-	}, 500);
-});
-
+function postData(resource, data) {
+	return fetchData(resource, data, "POST");
+}

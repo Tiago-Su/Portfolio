@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-class Project {
+class Project implements JsonSerializable {
 	private int $id;
 	private string $projectName;
 	private ?string $description;
@@ -34,7 +34,7 @@ class Project {
 			$description = $p["description"];
 			$github = $p["github"];
 			$imageId = $p["imageId"];
-			$favorite = $p["favorite"];
+			$favorite = (bool) $p["favorite"];
 
 			$projects[] = new Project($id, $projectName, $description, $github, $imageId, $favorite);
 		}
@@ -64,6 +64,57 @@ class Project {
 		return $projects;
 	
 	}
+
+	public static function getProjectById(PDO $db, int $id) : ?Project {
+		$stmt = $db->prepare("SELECT * FROM Project WHERE id = ?");
+		$stmt->execute(array($id));
+		$data = $stmt->fetch();
+		if ($data === null) return null;
+
+		$id = $data["id"];
+		$projectName = $data["projectName"];
+		$description = $data["description"];
+		$github = $data["github"];
+		$imageId = $data["imageId"];
+		$favorite = (bool) $data["favorite"];
+
+		return new Project($id, $projectName, $description, $github, $imageId, $favorite);
+	}
+
+	public static function getProjectsLike(PDO $db, string $search) : array {
+		$stmt = $db->prepare("SELECT * FROM Project WHERE projectName like ?");
+		$stmt->execute(array($search . "%"));
+		$data = $stmt->fetchAll();
+
+		$projects = array();
+		for ($i = 0; $i < count($data); $i++) {
+			$p = $data[$i];
+
+			$id = $p["id"];
+			$projectName = $p["projectName"];
+			$description = $p["description"];
+			$github = $p["github"];
+			$imageId = $p["imageId"];
+			$favorite = (bool) $p["favorite"];
+
+			$projects[] = new Project($id, $projectName, $description, $github, $imageId, $favorite);
+		}
+
+		return $projects;
+	
+	
+	}
+
+	public function jsonSerialize(): mixed {
+        return [
+            "id" => $this->id,
+            "projectName" => $this->projectName,
+            "description" => $this->description,
+            "github" => $this->github,
+            "imageId" => $this->imageId,
+            "favorite" => $this->favorite,
+        ];
+    }
 
 	// Getters
 	public function getId() : int {

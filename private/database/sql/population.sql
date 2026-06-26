@@ -2,7 +2,7 @@
 PRAGMA foreign_keys = ON;
 
 -- Insert the single image
-INSERT INTO Image (id, imagePath)
+INSERT INTO Image (id, imageName)
 VALUES (1, '1.png');
 
 -- Insert 4 projects using the same imageId = 1

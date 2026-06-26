@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 require_once __DIR__ . "./../../private/database/connection.php";
 require_once __DIR__ . "./../../private/database/classes/project.class.php";
+require_once __DIR__ . "./../../private/database/classes/image.class.php";
 
 function drawSectionHeader(string $header) : void { ?>
 	<header>
@@ -18,7 +19,7 @@ function drawStar(Project $project) : void {
 	<?php }
 }
 
-function drawProjectCard(Project $project, bool $isFavoriteSection) : void { 
+function drawProjectCard(PDO $db, Project $project, bool $isFavoriteSection, int $imageType) : void { 
 	if ($isFavoriteSection) { ?>
 		<article class="project invisible">
 	<?php } else { ?>
@@ -26,20 +27,27 @@ function drawProjectCard(Project $project, bool $isFavoriteSection) : void {
 	<?php } ?>
 
 		<header class="flex-row">
-			<h3><?= $project->getProjectName() ?></h3>
-			<?php if (!$isFavoriteSection) { 
-				drawStar($project);
-			}?>
+			<?php if (!$isFavoriteSection) { ?>
+				<h3 id="project<?= $project->getId() ?>"><?= $project->getProjectName() ?></h3>
+				<?php drawStar($project); ?>
+			<?php } else { ?>
+				<h3><?= $project->getProjectName() ?></h3>
+			<?php }?>
 		</header>
 		<p><?= $project->getDescription() ?></p>
-		<img src="https://picsum.photos/300/300" width=300 height=300 alt="project-<?= $project->getId() ?>-image">
+		<img src="/api/image.php?id=<?= $project->getImageId() ?>&type=<?=$imageType?>" alt="project-<?= $project->getId() ?>-image">
 		<a href="<?= $project->getGithub() ?>"><i class="icon fa-brands fa-github"></i></a>
 	</article>
 <?php } 
 
-function drawProjectList(PDO $db, bool $isFavoriteSection) : void { 
-	$projects = Project::getFavoriteProjects($db);
-	for ($i = 0; $i < count($projects); $i++) drawProjectCard($projects[$i], $isFavoriteSection);
+function drawProjectList(PDO $db, bool $isFavoriteSection, int $imageType) : void { 
+	if ($isFavoriteSection) {
+		$projects = Project::getFavoriteProjects($db);
+	} else {
+		$projects = Project::getAllProjects($db);
+	}
+
+	for ($i = 0; $i < count($projects); $i++) drawProjectCard($db, $projects[$i], $isFavoriteSection, $imageType);
 }
 
 function drawFavorite() { ?>
@@ -52,7 +60,7 @@ function drawFavorite() { ?>
 
 			<?php
 				$db = getDatabaseConnection();
-				drawProjectList($db, true);
+				drawProjectList($db, true, 2);
 			?>
 
 			<button class="arrow right-arrow">
@@ -66,24 +74,15 @@ function drawAllProjects() { ?>
 	<section class="flex-column" id="all-projects">
 		<?php
    			drawSectionHeader("All projects");
-			drawProjectList(getDatabaseConnection(), false);
+			drawProjectList(getDatabaseConnection(), false, 2);
 		?>
 	</section>
-<?php }
-
-function drawSearchList() { ?>
-
 <?php }
 
 function drawSearchModal() { ?>
 	<dialog class="modal" id="search-modal">
 		<div id="search-modal-content">
 			<ul class="trunctate-items">
-				<li class="selected">Project 1</li>
-				<li>Project 2aasjhdwjdjksahdjksahdjkshajkdhsjkdhshdjkashdjkashdjksahdjkshkdashkdsha</li>
-				<li>Project 3</li>
-				<li>Project 4</li>
-				<li>Project 5</li>
 			</ul>
 
 			<article class="project trunctate-items">

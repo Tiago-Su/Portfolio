@@ -15,6 +15,7 @@ function drawHeader() { ?>
 	<script src="https://kit.fontawesome.com/02aaf9f9a3.js" crossorigin="anonymous"></script>
 	
 	<script src="./../script/script.js" defer></script>
+	<script src="./../script/searchModal.js" defer></script>
 </head>
 <?php }
 

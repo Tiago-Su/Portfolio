@@ -2,7 +2,7 @@ PRAGMA foreign_keys = ON;
 
 CREATE TABLE Image (
 	id INTEGER NOT NULL,
-	imagePath TEXT NOT NULL,
+	imageName TEXT NOT NULL,
 
 	CONSTRAINT pk_image PRIMARY KEY(id)
 );
