@@ -14,7 +14,6 @@ const Mode = {
 let lastKey = null;
 let selectedProject = 0;
 let currentMode = Mode.CLOSED;
-let searchValue = "";
 
 async function drawProjectPreview(id) {
 	try {
@@ -111,6 +110,16 @@ function normalModeCmd(e) {
 	if (e.key === "Enter") {
 		e.preventDefault();
 		goToProject();
+	}
+
+	if (e.key === "x") {
+		searchBar.value = searchBar.value.slice(0, -1);
+		reloadSearchModal();
+	}
+
+	if ((e.key === "d" || e.key === "w") && lastKey === "d") {
+		searchBar.value = "";
+		reloadSearchModal();
 	}
 }
 

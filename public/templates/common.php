@@ -16,6 +16,7 @@ function drawHeader() { ?>
 	
 	<script src="./../script/script.js" defer></script>
 	<script src="./../script/searchModal.js" defer></script>
+	<script src="./../script/favorite.js" defer></script>
 </head>
 <?php }
 
