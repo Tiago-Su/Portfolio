@@ -17,6 +17,11 @@
 		display: none;
 	}
 
+	#overlay {
+		background-color: rgba(0, 0, 0, 0.8);
+		z-index: 5;
+	}
+
 	#best-projects {
 		border: var(--big-border-size) groove var(--color-white);
 
@@ -67,6 +72,8 @@
 		border: var(--small-border-size) solid var(--color-white);
 		background-color: var(--color-black);
 		color: var(--color-white);
+
+		z-index: 10;
 	}
 
 	#search-modal-content {

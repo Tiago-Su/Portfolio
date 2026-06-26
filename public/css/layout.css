@@ -9,6 +9,14 @@
 		flex-direction: column;
 	}
 
+	#overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+	}
+
 	#site-header {
 		text-align: center;
 		margin: var(--big-space) 0;

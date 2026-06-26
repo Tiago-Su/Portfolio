@@ -16,6 +16,7 @@ function drawHomePage() {
 			<?php drawAllProjects(); ?>
 		</main>
 		<?php drawSearchModal(); ?>
+		<div id="overlay" class="invisible"></div>
 	</body>
 	</html>
 <?php }

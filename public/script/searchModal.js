@@ -1,6 +1,7 @@
 const searchModal = document.querySelector("#search-modal");
 const searchProjectButton = document.querySelector("#see-projects");
 const searchBar = searchModal.querySelector("#search-bar > input");
+const overlay = document.querySelector("#overlay");
 
 const projectUl = searchModal.querySelector("div > ul");
 const article = searchModal.querySelector("div > article");
@@ -141,6 +142,7 @@ function openSearchModal() {
 	searchModal.showModal();
 	searchBar.focus();
 	currentMode = Mode.INSERT;
+	overlay.classList.remove("invisible");
 
 	selectedProject = 0;
 	reloadSearchModal();
@@ -150,6 +152,7 @@ function closeSearchModal() {
 	searchModal.close();
 	currentMode = Mode.CLOSED;
 	searchBar.value = "";
+	overlay.classList.add("invisible");
 
 	projectUl.children[selectedProject].classList.remove("selected");
 	selectedProject = 0;
