@@ -24,15 +24,18 @@ async function drawProjectPreview(id) {
 		const h3 = article.querySelector("header > h3");
 		const p = article.querySelector("p");
 		const img = article.querySelector("img");
+		const github = article.querySelector("input");
 
 		h3.textContent = project["projectName"];
 		p.textContent = project["description"];
 		img.src = imageURL;
+		github.value = project["github"];
 
 	} catch {
 		h3.innerHTML = "";
 		p.textContent = "";
 		img.src = "";
+		github.value = "";
 	}
 }
 
@@ -94,9 +97,9 @@ function normalModeCmd(e) {
 	}
 
 	if (e.key === "i") {
+		e.preventDefault();
 		searchBar.focus();
 		currentMode = Mode.INSERT;
-		e.preventDefault();
 	}
 
 	if (e.key === "k" || e.key === "ArrowUp") {
@@ -110,16 +113,22 @@ function normalModeCmd(e) {
 	}
 
 	if (e.key === "Enter") {
-		e.preventDefault();
 		goToProject();
 	}
 
+	if (e.key === "g") {
+		e.preventDefault();
+		openGitHub();
+	}
+
 	if (e.key === "x") {
+		e.preventDefault();
 		searchBar.value = searchBar.value.slice(0, -1);
 		reloadSearchModal();
 	}
 
 	if ((e.key === "d" || e.key === "w") && lastKey === "d") {
+		e.preventDefault();
 		searchBar.value = "";
 		reloadSearchModal();
 	}
@@ -224,6 +233,12 @@ searchBar.addEventListener("keydown", debounce((e) => {
 async function start() {
 	await drawProjectPreview(1);
 	await drawProjectList();
+}
+
+function openGitHub() {
+	if (selectedProject <= 0) return;
+	const projectList = projectUl.children;
+	window.open(article.querySelector("input").value, "_blank");
 }
 
 start();

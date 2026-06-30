@@ -96,6 +96,7 @@ function drawSearchModal() { ?>
 				</p>
 
 				<img src="https://picsum.photos/150/150" width=150 height=150 alt="project-1-image">
+				<input type="hidden" name="github">
 			</article>
 		</div>
 
@@ -108,10 +109,6 @@ function drawSearchModal() { ?>
 
 function drawExtraActions() : void { ?>
 	<div class="flex-row" id="extra-actions">
-		<button class="icon" id="add-project">
-			<i class="icon fa-solid fa-plus"></i>
-		</button>
-
 		<button class="icon" id="see-projects">
 			<i class="fa-solid fa-magnifying-glass"></i>
 		</button>
