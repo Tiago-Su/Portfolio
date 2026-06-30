@@ -86,8 +86,10 @@ function moveDown() {
 
 function goToProject() {
 	const projectList = projectUl.children;
-	window.location.hash = "#"
-	window.location.hash = "project" + projectList[selectedProject].id.split(":")[1];
+	document.querySelector("#project" + projectList[selectedProject].id.split(":")[1]).scrollIntoView({
+		behavior: "smooth",
+		block: "center"
+	})
 	closeSearchModal();
 }
 
