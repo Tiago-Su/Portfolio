@@ -16,26 +16,36 @@ let lastKey = null;
 let selectedProject = 0;
 let currentMode = Mode.CLOSED;
 
+function cleanProjectPreview() {
+	article.querySelector("header > h3").textContent = "";
+	article.querySelector("p").textContent = "";
+	article.querySelector("img").classList.add("invisible");
+	article.querySelector("input").value = "";
+
+}
+
 async function drawProjectPreview(id) {
+	const h3 = article.querySelector("header > h3");
+	const p = article.querySelector("p");
+	const img = article.querySelector("img");
+	const github = article.querySelector("input");
+
 	try {
 		const project = await getData("/api/project.php?id=" + id);
 		const imageURL = await fetchImageURL("/api/image.php?id=" + project["imageId"]);
 
-		const h3 = article.querySelector("header > h3");
-		const p = article.querySelector("p");
-		const img = article.querySelector("img");
-		const github = article.querySelector("input");
-
 		h3.textContent = project["projectName"];
 		p.textContent = project["description"];
+		img.classList.remove("invisible");
 		img.src = imageURL;
 		github.value = project["github"];
 
 	} catch {
-		h3.innerHTML = "";
+		h3.textContent = ""
 		p.textContent = "";
 		img.src = "";
 		github.value = "";
+		img.classList.add("invisible");
 	}
 }
 
@@ -86,6 +96,8 @@ function moveDown() {
 
 function goToProject() {
 	const projectList = projectUl.children;
+	if (projectList.length <= 0) return;
+
 	document.querySelector("#project" + projectList[selectedProject].id.split(":")[1]).scrollIntoView({
 		behavior: "smooth",
 		block: "center"
@@ -220,9 +232,10 @@ function debounce(fn, delay = 300) {
 	};
 }
 
-function reloadSearchModal() {
-	drawProjectList();
-	if (projectUl.childElementCount < selectedProject) drawProjectPreview(projectUl.children[selectedProject].id.split(":")[1]);
+async function reloadSearchModal() {
+	await drawProjectList();
+	if (projectUl.childElementCount > selectedProject) drawProjectPreview(projectUl.children[selectedProject].id.split(":")[1]);
+	else cleanProjectPreview();
 }
 
 searchBar.addEventListener("keydown", debounce((e) => {
@@ -238,8 +251,7 @@ async function start() {
 }
 
 function openGitHub() {
-	if (selectedProject <= 0) return;
-	const projectList = projectUl.children;
+	if (projectUl.children.length <= 0) return;
 	window.open(article.querySelector("input").value, "_blank");
 }
 
