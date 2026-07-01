@@ -16,9 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 	} else {
 		$data = Project::getAllProjects($db);
 	}
-} else if ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
-		
-	
 } else {
 	http_response_code(405);
 	exit;

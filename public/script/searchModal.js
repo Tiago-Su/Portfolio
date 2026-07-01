@@ -213,6 +213,7 @@ document.addEventListener("click", (e) => {
 	const rect = searchModal.getBoundingClientRect();
 	const inside = e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom;
 
+	if (searchModal.open && currentMode === Mode.INSERT && document.activeElement !== searchBar) currentMode = Mode.NORMAL;
 	if (searchModal.open && !inside) {
 		closeSearchModal();
 	}
